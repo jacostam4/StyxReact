@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,26 +12,28 @@ const Login = () => {
     e.preventDefault();
     
     try {
-        const response = await fetch("http://localhost:8074/api/usuario/auth", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-        });
+      const response = await fetch("http://localhost:8074/api/usuario/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (response.ok) {
-            console.log("Login exitoso:", data);
-            navigate("/"); // Redirige al home en caso de éxito
-        } else {
-            setError(data.message || "Credenciales incorrectas. Intenta nuevamente.");
-        }
+      if (response.ok) {
+        // 🔒 Guardar token y otros datos en localStorage
+        localStorage.setItem("token", data.token);
+        console.log("Login exitoso:", data);
+        navigate("/"); // Redirige al home
+      } else {
+        setError(data.message || "Credenciales incorrectas. Intenta nuevamente.");
+      }
     } catch (error) {
-        setError("Error al conectar con el servidor.");
+      setError("Error al conectar con el servidor.");
     }
-};
+  };
 
   return (
     <Container className="d-flex justify-content-center align-items-center vh-100">

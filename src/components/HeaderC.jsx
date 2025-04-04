@@ -11,12 +11,9 @@ const HeaderC = () => {
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/Login">Iniciar Sesión</Nav.Link>            
-            <NavDropdown title="Dropdown" id="nav-dropdown">
-              <NavDropdown.Item as={Link} to="/action1">Action</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/action2">Another action</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/something">Something else here</NavDropdown.Item>
+            <NavDropdown title="Cuenta" id="nav-dropdown">
+              <NavDropdown.Item as={Link} to="/Login">Iniciar Sesion</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/Register">Registrarse</NavDropdown.Item>                            
             </NavDropdown>            
           </Nav>
           <Form className="d-flex">
